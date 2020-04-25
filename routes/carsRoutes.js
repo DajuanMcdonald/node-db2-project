@@ -1,11 +1,18 @@
 const express = require('express');
-const db = require('../data/car-dealer.db3')
+const db = require('../data/config')
 
-const server = express();
+const router = express();
 
-server.get('/', (req, res) => {
+//get array of all cars: GET
+router.get('/', async (req, res, next) => {
+    try {
+        const cars = await db('cars');
+        res.json(cars);
+    } 
+    catch(err) {
+        next(err);
+    }
     
-    res.status(200).send('<h1>Database Schema Design</h1>')
 })
 
-module.exports = server;
+module.exports = router;
