@@ -5,14 +5,13 @@ const router = express.Router();
 
 
 //get array of all cars: GET
-router.get('/', async (req, res, next) => {
-    try {
-        const cars = await db('cars');
-        res.json(cars);
-    } 
-    catch(err) {
-        next(err);
-    }
+router.get('/', (req, res) => {
+    db('cars')
+    .then( allCars => {
+        res.status(200).json(allCars)
+    })
+    .catch(err => res.json({mesage: 'Unable to handle request'}))
+   
     
 })
 

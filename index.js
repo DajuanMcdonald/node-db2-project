@@ -1,9 +1,11 @@
 const express = require('express');
 const server = express();
 const carsRoute = require('./cars/carsRoutes');
+const salesRoute = require('./sales/salesRoutes');
 
-server.use('/cars', carsRoute);
 server.use(express.json());
+server.use('/cars', carsRoute);
+server.use('/sales', salesRoute);
 
 
 
