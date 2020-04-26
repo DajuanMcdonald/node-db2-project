@@ -3,7 +3,7 @@ const server = express();
 const carsRoute = require('./routes/carsRoutes');
 
 server.use('/cars', carsRoute);
-server.use(express.json())
+server.use(express.json());
 
 
 
