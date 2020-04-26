@@ -2,17 +2,7 @@ const express = require('express');
 const db = require('../data/config')
 
 const router = express.Router();
-// router.post('/', async (req, res, next) => {
-//     try {
-//         const data = req.body;
-//         db('cars').insert(data)
-//         const newData = await db('cars').where(req.params.id)
-//         res.json(newData)
-//     }
-//     catch(err) {
-//         next(err)
-//     }
-// })
+
 
 //get array of all cars: GET
 router.get('/', async (req, res, next) => {
@@ -27,28 +17,30 @@ router.get('/', async (req, res, next) => {
 })
 
 
-router.get('/:id', async (req, res, next) => {
-    try {
-        const cars = await db('cars').where({id: req.params.id}).first()
-    }
-    catch(err) {
-        next(err);
-    }
+router.get('/:id',(req, res) => {
+  const { id } = req.params;
+  db('cars').where({ id }).first()
+  .then(car => {
+      res.json(car)
+  })
+  .catch(err => {
+      res.status(500).json({errorMessage: 'Failed to retrieve car data'})
+  })
 })
 
 
-router.post('/', async (req, res, next) => {
-    try {
-        const carsData = req.body;
-        console.log(carsData)
-        const [id] = await db("cars").insert(carsData)
-        const newCars = await db("cars").where({ id })
-
-        res.status(201).json(newCars)
-    }
-    catch(err) {
-        next(err)
-    }
+router.post('/', (req, res) => {
+    const carsData = req.body;
+    db('cars').insert(carsData)
+    .then(ids => {
+        db('cars').where({id: ids[0]})
+        .then(newCarEntry => {
+            res.status(201).json(newCarEntry)
+        })
+    }).catch(err => {
+        res.status(500).json({errorMessage: 'Failed to add car to table', err})
+    })
+   
 })
 
 module.exports = router;
