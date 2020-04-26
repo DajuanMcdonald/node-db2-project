@@ -16,7 +16,7 @@ router.get('/', async (req, res, next) => {
     
 })
 
-
+//get single car by Id: GET
 router.get('/:id',(req, res) => {
   const { id } = req.params;
   db('cars').where({ id }).first()
@@ -29,6 +29,7 @@ router.get('/:id',(req, res) => {
 })
 
 
+//add new car: POST/CREATE
 router.post('/', (req, res) => {
     const carsData = req.body;
     db('cars').insert(carsData)
