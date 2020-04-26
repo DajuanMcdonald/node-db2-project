@@ -6,7 +6,8 @@ exports.seed = function(knex) {
       // Inserts seed entries
       return knex('cars').insert([
         {make: 'Volkswagon', model: 'Jetta', vin: '12456', milage: 9000},
-        {make: 'BMW', model: '6 Series', vin: '2468', milage: 988},
+        {make: 'BMW', model: 'Z Series', vin: '2468', milage: 988},
+        {make: 'Lexus', model: 'C Class', vin: '24555L68', milage: 1988},
         
         
       ]);

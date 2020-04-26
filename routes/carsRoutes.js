@@ -37,18 +37,18 @@ router.get('/:id', async (req, res, next) => {
 })
 
 
-// router.post('/', async (req, res, next) => {
-//     try {
-//         const carsData = req.body;
-//         console.log(carsData)
-//         const [id] = await db("cars").insert(carsData)
-//         const newCars = await db("cars").where({ id })
+router.post('/', async (req, res, next) => {
+    try {
+        const carsData = req.body;
+        console.log(carsData)
+        const [id] = await db("cars").insert(carsData)
+        const newCars = await db("cars").where({ id })
 
-//         res.status(201).json(newCars)
-//     }
-//     catch(err) {
-//         next(err)
-//     }
-// })
+        res.status(201).json(newCars)
+    }
+    catch(err) {
+        next(err)
+    }
+})
 
 module.exports = router;
