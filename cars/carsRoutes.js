@@ -43,4 +43,19 @@ router.post('/', (req, res) => {
    
 })
 
+//update existing car data: PUT/UPDATE
+router.put('/:id', (req, res) => {
+    const updates = req.body;
+    
+    db('cars').where({ id: req.params.id}).update(updates)
+    .then( car => {
+        if (car) {
+            db('cars').where('id', '=', req.params.id).first()
+            .then(carChange => res.status(200).json(carChange))
+            .catch( err => res.json({message: 'Unable to update that record'}))
+        }
+    })
+    .catch(err => res.status(500).json({message: 'Internal Server Error: 500'}))
+})
+
 module.exports = router;
