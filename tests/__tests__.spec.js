@@ -1,7 +1,7 @@
 const knex = require('../data/config');
 
 describe('CRUD operations for cars table', () => {
-    before((done) => {
+    beforeAll((done) => {
         knex.migrate.latest()
         .then(() => {
             return knex.seed.run();
