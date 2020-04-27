@@ -6,12 +6,13 @@
     "scripts": {
         "start": "node index.js",
         "server": "nodemon index.js",
-        "test": "jest"
+        "test": "jest --watch --verbose --runInBand --detectOpenHandles"
     },
     "author": "Lambda School",
     "devDependencies": {
         "jest": "^25.4.0",
-        "nodemon": "^2.0.3"
+        "nodemon": "^2.0.3",
+        "supertest": "^4.0.2"
     },
     "dependencies": {
         "express": "^4.17.1",

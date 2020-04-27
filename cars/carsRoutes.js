@@ -10,7 +10,7 @@ router.get('/', (req, res) => {
     .then( allCars => {
         res.status(200).json(allCars)
     })
-    .catch(err => res.status(500).json({mesage: 'Unable to handle request'}))
+    .catch(err => res.status.json({mesage: 'Unable to handle request'}))
    
     
 })
