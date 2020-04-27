@@ -5,6 +5,7 @@ exports.up = function(knex) {
         tbl.integer('sale_id')
         .references('id').inTable('cars')
         .onDelete('CASCADE')
+        .onUpdate('CASCADE')
         .index();
         
         tbl.timestamps(true, true);
@@ -13,5 +14,5 @@ exports.up = function(knex) {
 };
 
 exports.down = function(knex) {
-  return knex.schema.dropTable('sales')
+  return knex.schema.dropTableIfExists('sales').dropTableIfExists('cars');
 };
